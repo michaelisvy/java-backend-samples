@@ -14,16 +14,14 @@ public class CustomerRepository {
     @Autowired
     private EntityManager entityManager;
 
-    List<Customer> findByLastName(String lastName) {
-        Query query =  entityManager.createQuery("from Customer where lastName=:lastName");
+    Customer findByLastName(String lastName) {
+        Query query =  entityManager.createQuery("from Customer c join fetch c.accountList where c.lastName=:lastName");
         query.setParameter("lastName", lastName);
-        return query.getResultList();
+        return (Customer) query.getSingleResult();
     }
 
     @Transactional
     public void save(Customer customer) {
         entityManager.persist(customer);
     }
-
-
 }

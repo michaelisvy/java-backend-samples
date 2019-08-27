@@ -1,9 +1,10 @@
 package com.bank;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
+import org.hibernate.annotations.Cascade;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Customer {
@@ -14,6 +15,9 @@ public class Customer {
     private String firstName;
     private String lastName;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Account> accountList;
+
     protected Customer() {}
 
     public Customer(String firstName, String lastName) {
@@ -21,14 +25,19 @@ public class Customer {
         this.lastName = lastName;
     }
 
-    @Override
-    public String toString() {
-        return String.format(
-                "Customer[id=%d, firstName='%s', lastName='%s']",
-                id, firstName, lastName);
+    public void setAccountList(List<Account> accountList) {
+        this.accountList = accountList;
+    }
+
+    public List<Account> getAccountList() {
+        return accountList;
     }
 
     public String getFirstName() {
         return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 }
