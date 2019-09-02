@@ -15,13 +15,22 @@ public class CustomerRepository {
     private EntityManager entityManager;
 
     Customer findByLastName(String lastName) {
-        Query query =  entityManager.createQuery("from Customer c join fetch c.accountList where c.lastName=:lastName");
+        Query query =  entityManager.createQuery("from Customer c join fetch c.accounts where c.lastName=:lastName");
         query.setParameter("lastName", lastName);
         return (Customer) query.getSingleResult();
     }
 
+
+
     @Transactional
     public void save(Customer customer) {
         entityManager.persist(customer);
+    }
+
+    public List<Customer> findRichCustomers(float minimumAmount) {
+        Query query = entityManager.createQuery("select c from Customer c join c.accounts a where a.amount > :amount");
+        query.setParameter("amount", minimumAmount);
+        Object o =   query.getResultList();
+        return (List<Customer>) o;
     }
 }

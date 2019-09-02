@@ -9,15 +9,21 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.sql.DataSource;
 import java.text.MessageFormat;
 import java.util.*;
 
+import static org.assertj.core.api.Assertions.*;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)
-public class CustomerRepositoryH2Test {
+public class DefaultCustomerRepositoryTest {
 
 	@Autowired
 	private CustomerRepository customerRepository;
+
+	@Autowired
+	private DataSource dataSource;
 
 	private Customer customer1;
 	private Customer customer2;
@@ -54,11 +60,17 @@ public class CustomerRepositoryH2Test {
 		Assertions.assertThat(firstAccount.getAmount()).isGreaterThanOrEqualTo(minimumAmount);
 	}
 
-	//@Test @Transactional
+	@Test @Transactional
 	public void shouldFindCustomerWithAccounts() {
 		Customer customer = this.customerRepository.findByLastName("Bauer");
 		Account account = customer.getAccounts().iterator().next();
 		Assertions.assertThat(account.getAmount()).isEqualTo(50);
+	}
+
+	@Test @Transactional
+	public void testDatabaseProvider() throws Exception {
+		String databaseUrl = this.dataSource.getConnection().getMetaData().getURL();
+		assertThat(databaseUrl).contains("h2");
 	}
 
 

@@ -1,12 +1,10 @@
 package com.bank;
 
 
-import org.hibernate.annotations.Cascade;
-
 import javax.persistence.*;
 import java.util.List;
 
-@Entity
+@Entity @Table(name = "customer")
 public class Customer {
 
     @Id
@@ -16,7 +14,8 @@ public class Customer {
     private String lastName;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Account> accountList;
+    @JoinColumn(name = "customer_id")
+    private List<Account> accounts;
 
     protected Customer() {}
 
@@ -25,12 +24,12 @@ public class Customer {
         this.lastName = lastName;
     }
 
-    public void setAccountList(List<Account> accountList) {
-        this.accountList = accountList;
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
     }
 
-    public List<Account> getAccountList() {
-        return accountList;
+    public List<Account> getAccounts() {
+        return accounts;
     }
 
     public String getFirstName() {
