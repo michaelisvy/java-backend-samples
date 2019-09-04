@@ -1,5 +1,8 @@
-package com.bank;
+package com.bank.repository;
 
+import com.bank.Application;
+import com.bank.model.Account;
+import com.bank.model.Customer;
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,8 +13,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
-import java.text.MessageFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -25,21 +28,18 @@ public class DefaultCustomerRepositoryTest {
 	@Autowired
 	private DataSource dataSource;
 
-	private Customer customer1;
-	private Customer customer2;
-
 	@Before
 	public void initialize() {
 		List<Account> accounts1 = new ArrayList<>();
 		accounts1.add(new Account(50));
 		accounts1.add(new Account(100));
-		customer1 = new Customer("Jack", "Bauer");
+		Customer customer1 = new Customer("Jack", "Bauer");
 		customer1.setAccounts(accounts1);
 
 		List<Account> accounts2 = new ArrayList<>();
 		accounts2.add(new Account(500));
 		accounts2.add(new Account(1000));
-		customer2 = new Customer("Chloe", "O'Brian");
+		Customer customer2 = new Customer("Chloe", "O'Brian");
 		customer2.setAccounts(accounts2);
 
 		this.customerRepository.save(customer1);

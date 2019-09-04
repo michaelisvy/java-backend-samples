@@ -1,4 +1,4 @@
-package com.bank;
+package com.bank.model;
 
 
 import javax.persistence.*;
@@ -16,6 +16,9 @@ public class Customer {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id")
     private List<Account> accounts;
+
+    @Version
+    private int version;
 
     protected Customer() {}
 
@@ -36,7 +39,15 @@ public class Customer {
         return firstName;
     }
 
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
     public String getLastName() {
         return lastName;
+    }
+
+    public int getVersion() {
+        return version;
     }
 }
