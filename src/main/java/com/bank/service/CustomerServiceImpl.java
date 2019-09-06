@@ -1,0 +1,25 @@
+package com.bank.service;
+
+import com.bank.model.Customer;
+import com.bank.repository.CustomerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class CustomerServiceImpl implements CustomerService {
+
+    @Autowired
+    private CustomerRepository customerRepository;
+
+    @Override
+    public Customer findByLastName(String lastName) {
+        return this.customerRepository.findByLastName(lastName);
+    }
+
+    @Override
+    public void save(Customer customer) {
+        this.customerRepository.save(customer);
+    }
+}
+
+
