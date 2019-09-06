@@ -2,6 +2,7 @@ package com.bank.model;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity @Table(name = "customer")
@@ -15,7 +16,7 @@ public class Customer {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id")
-    private List<Account> accounts;
+    private List<Account> accounts = new ArrayList<>();
 
     @Version
     private int version;
@@ -29,6 +30,10 @@ public class Customer {
 
     public void setAccounts(List<Account> accounts) {
         this.accounts = accounts;
+    }
+
+    public void addAccount(Account account) {
+        accounts.add(account);
     }
 
     public List<Account> getAccounts() {

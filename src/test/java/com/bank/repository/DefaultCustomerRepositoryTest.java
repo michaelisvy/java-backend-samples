@@ -28,31 +28,14 @@ public class DefaultCustomerRepositoryTest {
 	@Autowired
 	private DataSource dataSource;
 
-	@Before
-	public void initialize() {
-		List<Account> accounts1 = new ArrayList<>();
-		accounts1.add(new Account(50));
-		accounts1.add(new Account(100));
-		Customer customer1 = new Customer("Jack", "Bauer");
-		customer1.setAccounts(accounts1);
-
-		List<Account> accounts2 = new ArrayList<>();
-		accounts2.add(new Account(500));
-		accounts2.add(new Account(1000));
-		Customer customer2 = new Customer("Chloe", "O'Brian");
-		customer2.setAccounts(accounts2);
-
-		this.customerRepository.save(customer1);
-		this.customerRepository.save(customer2);
-	}
-
-	@Test @Transactional
+	@Test
 	public void shouldFindCustomer() {
 		Customer customer = this.customerRepository.findByLastName("Bauer");
 		Assertions.assertThat(customer.getFirstName()).isEqualTo("Jack");
 	}
 
 	@Test @Transactional
+	// @Transactional is needed because Hibernate session needs to remain open when we do customer.getAccount()
 	public void shouldFindRichCustomers() {
 		float minimumAmount = 500;
 		List<Customer> customers = this.customerRepository.findRichCustomers(minimumAmount);
@@ -60,17 +43,26 @@ public class DefaultCustomerRepositoryTest {
 		Assertions.assertThat(firstAccount.getAmount()).isGreaterThanOrEqualTo(minimumAmount);
 	}
 
-	@Test @Transactional
+	@Test
 	public void shouldFindCustomerWithAccounts() {
 		Customer customer = this.customerRepository.findByLastName("Bauer");
 		Account account = customer.getAccounts().iterator().next();
 		Assertions.assertThat(account.getAmount()).isEqualTo(50);
 	}
 
-	@Test @Transactional
+	@Test
 	public void testDatabaseProvider() throws Exception {
 		String databaseUrl = this.dataSource.getConnection().getMetaData().getURL();
 		assertThat(databaseUrl).contains("h2");
+	}
+
+	@Test
+	public void shouldSaveCustomer() {
+		Customer customer = new Customer("Eric", "Dupont");
+		customer.addAccount(new Account(1000000));
+		this.customerRepository.save(customer);
+		Customer retrievedCustomer = this.customerRepository.findByLastName("Dupont");
+		assertThat(retrievedCustomer.getFirstName()).isEqualTo("Eric");
 	}
 
 
