@@ -10,7 +10,7 @@ import javax.sql.DataSource;
 import static org.assertj.core.api.Assertions.*;
 
 @ActiveProfiles("mysql")
-public class CustomerRepositoryMySqlTest extends DefaultCustomerRepositoryTest {
+public class CustomerRepositoryMySqlTest extends CustomerRepositoryTest {
 
 	@Autowired
 	private DataSource dataSource;
