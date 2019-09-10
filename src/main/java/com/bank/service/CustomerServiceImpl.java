@@ -4,6 +4,7 @@ import com.bank.model.Customer;
 import com.bank.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -16,7 +17,7 @@ public class CustomerServiceImpl implements CustomerService {
         return this.customerRepository.findByLastName(lastName);
     }
 
-    @Override
+    @Override @Transactional
     public void save(Customer customer) {
         this.customerRepository.save(customer);
     }

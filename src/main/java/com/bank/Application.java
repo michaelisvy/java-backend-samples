@@ -14,8 +14,6 @@ public class Application {
 		assignDefaultProfile(args, application);
 
 		SpringApplication.run(Application.class);
-
-
 	}
 
 	private static void assignDefaultProfile(String[] args, SpringApplication application) {
@@ -29,6 +27,4 @@ public class Application {
 		return source.containsProperty("spring.profiles.active") &&
 				System.getenv().containsKey("SPRING_PROFILES_ACTIVE");
 	}
-
-
 }

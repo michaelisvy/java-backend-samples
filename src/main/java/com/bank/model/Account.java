@@ -4,8 +4,6 @@ import javax.persistence.*;
 
 @Entity @Table(name = "account")
 public class Account {
-    @ManyToOne
-    private Customer customer;
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
