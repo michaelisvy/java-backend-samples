@@ -7,3 +7,4 @@ insert into customer (id, first_name, last_name, version) values (2,'Chloe','OBr
 insert into account(id, amount, customer_id) values (3, 500, 2);
 insert into account(id, amount, customer_id) values (4, 1000, 2);
 
+insert into payment (id, payment_number, first_name, last_name, amount, status) values (1, 1001, 'Jack','Bauer', 200, 'in progress')

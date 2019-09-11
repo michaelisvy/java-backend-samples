@@ -11,6 +11,7 @@ public class Payment {
     private String firstName;
     private String lastName;
     private float amount;
+    private int paymentNumber;
     private String status;
 
     public Payment(String firstName, String lastName, float amount, String status) {
@@ -20,8 +21,19 @@ public class Payment {
         this.status = status;
     }
 
+    public Payment() {
+    }
+
     public String getStatus() {
         return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getFirstName() {
+        return firstName;
     }
 
     public int getId() {

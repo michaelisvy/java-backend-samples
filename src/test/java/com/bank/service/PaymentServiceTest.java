@@ -9,9 +9,16 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+
+import static org.assertj.core.api.Assertions.*;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class PaymentServiceTest {
+
+    @Autowired
+    private EntityManager entityManager;
 
     @Autowired
     private PaymentService paymentService;
@@ -23,7 +30,20 @@ public class PaymentServiceTest {
         Integer id = draftPayment.getId();
 
         Payment retrievedPayment = this.paymentService.findById(id);
-        Assertions.assertThat(retrievedPayment.getStatus()).isEqualTo("in progress");
-        Assertions.assertThat(retrievedPayment.getId()).isNotNull();
+        assertThat(retrievedPayment.getStatus()).isEqualTo("in progress");
+    }
+
+    @Test
+    public void shouldRetrievePayment() {
+        Payment payment = this.paymentService.findByPaymentNumber(1001);
+        assertThat(payment.getFirstName()).isEqualTo("Jack");
+    }
+
+    @Test @Transactional
+    public void shouldUpdatePayment() {
+        this.paymentService.markAsDone(1001);
+
+        Payment payment = this.paymentService.findByPaymentNumber(1001);
+        assertThat(payment.getStatus()).isEqualTo("done");
     }
 }

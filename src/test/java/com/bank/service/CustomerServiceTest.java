@@ -26,7 +26,6 @@ public class CustomerServiceTest {
 	@Autowired
 	private CustomerService customerService;
 
-
 	@Test
 	public void shouldFindCustomer() {
 		Customer customer = this.customerService.findByLastName("Bauer");
