@@ -28,6 +28,7 @@ public class PaymentServiceTest {
         Payment draftPayment = new Payment ("John", "Smith", 200, "in progress");
         this.paymentService.save(draftPayment);
         Integer id = draftPayment.getId();
+        this.entityManager.detach(draftPayment);
 
         Payment retrievedPayment = this.paymentService.findById(id);
         assertThat(retrievedPayment.getStatus()).isEqualTo("in progress");
@@ -40,10 +41,19 @@ public class PaymentServiceTest {
     }
 
     @Test @Transactional
-    public void shouldUpdatePayment() {
-        this.paymentService.markAsDone(1001);
+    public void shouldUpdatePaymentUsingMQ() throws InterruptedException {
+        Payment paymentBeforeMessage = this.paymentService.findByPaymentNumber(1001);
+        assertThat(paymentBeforeMessage.getStatus()).isEqualTo("in progress");
 
-        Payment payment = this.paymentService.findByPaymentNumber(1001);
-        assertThat(payment.getStatus()).isEqualTo("done");
+        this.paymentService.sendMessage(1001);
+        Thread.sleep(200);
+
+        this.entityManager.detach(paymentBeforeMessage);
+        Payment paymentAfterMessage = this.paymentService.findByPaymentNumber(1001);
+        assertThat(paymentAfterMessage.getStatus()).isEqualTo("done");
+
+
     }
+
+
 }

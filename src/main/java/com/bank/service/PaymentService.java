@@ -13,10 +13,12 @@ public class PaymentService {
     @Autowired
     private PaymentRepository paymentRepository;
 
+    @Autowired
+    private PaymentMessageProducer paymentMessageProducer;
+
     public void save(Payment payment) {
         this.paymentRepository.save(payment);
     }
-
 
 
     public Payment findById(Integer id) {
@@ -34,5 +36,9 @@ public class PaymentService {
     public void markAsDone(int paymentNumber) {
         Payment payment = this.findByPaymentNumber(paymentNumber);
         payment.setStatus("done");
+    }
+
+    public void sendMessage(int paymentNumber) {
+        this.paymentMessageProducer.send(paymentNumber);
     }
 }

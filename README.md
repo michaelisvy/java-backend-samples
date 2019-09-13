@@ -8,4 +8,6 @@
 `mvn spring-boot:run -Dspring.profiles.active=mysql`
 
 # In order to run all the tests
-`MySql` and `RabbitMQ` should be installed locally
+* `MySql` should be started (on MacOS you can use MAMP)
+* `MongoDB` should be started (on MacOS: `mongod --config /usr/local/etc/mongod.conf`)
+* `RabbitMQ` should be started (on MacOs: `rabbitmq-server`)
