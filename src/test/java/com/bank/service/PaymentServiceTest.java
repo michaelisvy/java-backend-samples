@@ -1,12 +1,13 @@
 package com.bank.service;
 
 import com.bank.model.Payment;
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
@@ -18,10 +19,20 @@ import static org.assertj.core.api.Assertions.*;
 public class PaymentServiceTest {
 
     @Autowired
+    ApplicationContext applicationContext;
+
+    @Autowired
     private EntityManager entityManager;
 
     @Autowired
     private PaymentService paymentService;
+
+    @Test
+    public void checkTxManager() {
+        String[] names = this.applicationContext.getBeanDefinitionNames();
+        for(int i=0; i<names.length; i++)
+        System.out.println(names[i]);
+    }
 
     @Test @Transactional
     public void shouldCreatePayment() {
@@ -46,7 +57,7 @@ public class PaymentServiceTest {
         assertThat(paymentBeforeMessage.getStatus()).isEqualTo("in progress");
 
         this.paymentService.sendMessage(1001);
-        Thread.sleep(200);
+        Thread.sleep(1000);
 
         this.entityManager.detach(paymentBeforeMessage);
         Payment paymentAfterMessage = this.paymentService.findByPaymentNumber(1001);
