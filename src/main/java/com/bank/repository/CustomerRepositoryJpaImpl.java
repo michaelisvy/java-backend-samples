@@ -12,12 +12,14 @@ import java.util.List;
 @Repository
 public class CustomerRepositoryJpaImpl implements CustomerRepository {
 
+    public static final String SELECT_RICH_CUSTOMERS_WITHOUT_ACCOUNTS = "select c from Customer c join c.accounts a where a.amount > :amount";
+    public static final String SELECT_CUSTOMERS_WITH_ACCOUNTS_BY_NAME = "from Customer c join fetch c.accounts where c.lastName=:lastName";
     @Autowired
     private EntityManager entityManager;
 
     @Override
     public Customer findByLastName(String lastName) {
-        Query query =  entityManager.createQuery("from Customer c join fetch c.accounts where c.lastName=:lastName");
+        Query query =  entityManager.createQuery(SELECT_CUSTOMERS_WITH_ACCOUNTS_BY_NAME);
         query.setParameter("lastName", lastName);
         return (Customer) query.getSingleResult();
     }
@@ -32,7 +34,7 @@ public class CustomerRepositoryJpaImpl implements CustomerRepository {
 
     @Override
     public List<Customer> findRichCustomers(float minimumAmount) {
-        Query query = entityManager.createQuery("select c from Customer c join c.accounts a where a.amount > :amount");
+        Query query = entityManager.createQuery(SELECT_RICH_CUSTOMERS_WITHOUT_ACCOUNTS);
         query.setParameter("amount", minimumAmount);
         Object o =   query.getResultList();
         return (List<Customer>) o;

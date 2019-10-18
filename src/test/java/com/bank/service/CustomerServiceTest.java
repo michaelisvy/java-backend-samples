@@ -56,6 +56,4 @@ public class CustomerServiceTest {
 		Customer retrievedCustomer = this.customerService.findByLastName("Dupont");
 		assertThat(retrievedCustomer.getFirstName()).isEqualTo("Eric");
 	}
-
-
 }

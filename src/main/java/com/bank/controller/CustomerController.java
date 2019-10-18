@@ -15,7 +15,6 @@ public class CustomerController {
 
     @GetMapping("/customer/{lastName}")
     public Customer findByLastName(@PathVariable String lastName) {
-        System.out.println("lastname: " + lastName);
         return this.customerService.findByLastName(lastName);
     }
 }
