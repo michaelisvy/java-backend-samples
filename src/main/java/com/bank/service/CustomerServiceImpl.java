@@ -19,7 +19,8 @@ public class CustomerServiceImpl implements CustomerService {
         return this.customerRepository.findByLastName(lastName);
     }
 
-    @Override @Transactional
+    @Override
+    @Transactional
     public void save(Customer customer) {
         this.customerRepository.save(customer);
     }

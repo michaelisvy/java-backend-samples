@@ -18,7 +18,7 @@ public class JsonDateTimeTest {
         book.setPublishingTime(ZonedDateTime.now());
         StringWriter stringEmp = new StringWriter();
         objectMapper.writeValue(stringEmp, book);
-        System.out.println("Employee JSON is\n"+stringEmp);
+        System.out.println("Employee JSON is\n" + stringEmp);
 
     }
 }

@@ -31,7 +31,8 @@ public class CustomerOptimisticLockingTest {
         transaction.commit();
     }
 
-    @Test @Ignore
+    @Test
+    @Ignore
     public void shouldHaveOptimisticLockingConflict() {
         EntityManager entityManager1 = this.entityManagerFactory.createEntityManager();
         Customer customer1 = entityManager1.find(Customer.class, 1L);

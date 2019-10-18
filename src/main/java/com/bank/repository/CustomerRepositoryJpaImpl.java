@@ -19,11 +19,10 @@ public class CustomerRepositoryJpaImpl implements CustomerRepository {
 
     @Override
     public Customer findByLastName(String lastName) {
-        Query query =  entityManager.createQuery(SELECT_CUSTOMERS_WITH_ACCOUNTS_BY_NAME);
+        Query query = entityManager.createQuery(SELECT_CUSTOMERS_WITH_ACCOUNTS_BY_NAME);
         query.setParameter("lastName", lastName);
         return (Customer) query.getSingleResult();
     }
-
 
 
     @Override
@@ -36,7 +35,7 @@ public class CustomerRepositoryJpaImpl implements CustomerRepository {
     public List<Customer> findRichCustomers(float minimumAmount) {
         Query query = entityManager.createQuery(SELECT_RICH_CUSTOMERS_WITHOUT_ACCOUNTS);
         query.setParameter("amount", minimumAmount);
-        Object o =   query.getResultList();
+        Object o = query.getResultList();
         return (List<Customer>) o;
     }
 }
