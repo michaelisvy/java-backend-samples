@@ -2,6 +2,7 @@ package samples.datetime;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import java.io.StringWriter;
@@ -16,9 +17,10 @@ public class JsonDateTimeTest {
 
         Book book = new Book();
         book.setPublishingTime(ZonedDateTime.now());
-        StringWriter stringEmp = new StringWriter();
-        objectMapper.writeValue(stringEmp, book);
-        System.out.println("Employee JSON is\n" + stringEmp);
+        StringWriter stringWriter = new StringWriter();
+        objectMapper.writeValue(stringWriter, book);
+        Assertions.assertThat(stringWriter).isNotNull();
+        System.out.println("Employee JSON is\n" + stringWriter);
 
     }
 }

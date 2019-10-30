@@ -38,23 +38,7 @@ public class Customer {
         return accounts;
     }
 
-    public void setAccounts(List<Account> accounts) {
-        this.accounts = accounts;
-    }
-
     public String getFirstName() {
         return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public int getVersion() {
-        return version;
     }
 }

@@ -16,7 +16,6 @@ public class Account {
     }
 
     public Account(float amount) {
-        this.id = id;
         this.amount = amount;
     }
 
