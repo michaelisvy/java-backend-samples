@@ -3,6 +3,8 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
 	id 'java'
 	id "org.sonarqube" version "2.8"
+	id 'com.github.ben-manes.versions' version '0.27.0' // allows to run ./gradlew dependencyUpdates
+
 }
 
 group = 'com.example'
