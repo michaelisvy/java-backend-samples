@@ -10,6 +10,7 @@ plugins {
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
+project.buildDir = 'target' // so it uses the same as Maven (otherwise it uses 'build' by default)
 
 repositories {
 	mavenCentral()
