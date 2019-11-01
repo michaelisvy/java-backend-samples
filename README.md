@@ -1,10 +1,14 @@
-# Starting the application with default profile (h2)
+# Build system
+As of now, this project can be built using Gradle or Maven. Gradle seems much more concise so it's possible that we'll move to Gradle only in the future.
 
+# Starting the application with default profile (h2)
+`gradle bootRun`
 `mvn spring-boot:run`
 
 
 # Starting the application with MySql profile
 
+`SPRING_PROFILES_ACTIVE=mysql gradle clean bootRun`
 `mvn spring-boot:run -Dspring.profiles.active=mysql`
 
 # In order to run all the tests
