@@ -1,4 +1,4 @@
-package com.bank.service;
+package completeapp.bank.service;
 
 import org.springframework.test.context.ActiveProfiles;
 

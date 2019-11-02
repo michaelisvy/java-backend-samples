@@ -1,4 +1,4 @@
-package samples.datetime;
+package datetime.json;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

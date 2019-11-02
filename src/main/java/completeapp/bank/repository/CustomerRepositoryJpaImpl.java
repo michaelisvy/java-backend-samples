@@ -1,6 +1,6 @@
-package com.bank.repository;
+package completeapp.bank.repository;
 
-import com.bank.model.Customer;
+import completeapp.bank.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;

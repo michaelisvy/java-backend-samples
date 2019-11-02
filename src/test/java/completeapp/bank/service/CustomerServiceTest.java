@@ -1,8 +1,8 @@
-package com.bank.service;
+package completeapp.bank.service;
 
-import com.bank.Application;
-import com.bank.model.Account;
-import com.bank.model.Customer;
+import completeapp.bank.Application;
+import completeapp.bank.model.Account;
+import completeapp.bank.model.Customer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
-package com.bank.repository;
+package completeapp.bank.repository;
 
-import com.bank.model.Customer;
+import completeapp.bank.model.Customer;
 
 import java.util.List;
 

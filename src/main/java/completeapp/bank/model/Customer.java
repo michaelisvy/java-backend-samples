@@ -1,4 +1,4 @@
-package com.bank.model;
+package completeapp.bank.model;
 
 
 import javax.persistence.*;

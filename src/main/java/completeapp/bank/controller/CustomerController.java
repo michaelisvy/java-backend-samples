@@ -1,7 +1,7 @@
-package com.bank.controller;
+package completeapp.bank.controller;
 
-import com.bank.model.Customer;
-import com.bank.service.CustomerService;
+import completeapp.bank.model.Customer;
+import completeapp.bank.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

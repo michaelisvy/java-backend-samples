@@ -1,6 +1,6 @@
-package com.bank.repository;
+package completeapp.bank.repository;
 
-import com.bank.Application;
+import completeapp.bank.Application;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
