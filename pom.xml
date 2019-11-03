@@ -75,7 +75,7 @@
                 <version>${jacoco.version}</version>
                 <configuration>
                     <excludes>
-                        <exclude>**/Application.class</exclude>
+                        <exclude>**/samples.SamplesApplication.class</exclude>
                     </excludes>
                 </configuration>
                 <executions>
