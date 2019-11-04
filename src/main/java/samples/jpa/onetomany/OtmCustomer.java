@@ -1,12 +1,12 @@
 package samples.jpa.onetomany;
 
-
-
 import lombok.Data;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity @Data
 public class OtmCustomer {
@@ -23,7 +23,7 @@ public class OtmCustomer {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id")
-    private List<OtmAddress> addresses = new ArrayList<>();
+    private Set<OtmAddress> addresses = new HashSet<>();
 
     @Version
     private int version;
