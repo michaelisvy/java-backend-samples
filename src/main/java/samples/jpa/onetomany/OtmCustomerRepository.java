@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface OtmCustomerRepository extends CrudRepository <OtmCustomer, Long> {
-    @Query("from OtmCustomer c join fetch c.accounts where c.lastName =:lastName")
+    @Query("from OtmCustomer c join fetch c.accounts join fetch c.addresses a where c.lastName =:lastName")
     public OtmCustomer findByLastName(String lastName);
 }
