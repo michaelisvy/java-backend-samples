@@ -1,11 +1,11 @@
 package samples.completeapp.bank.controller;
 
-import samples.completeapp.bank.model.Customer;
-import samples.completeapp.bank.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+import samples.completeapp.bank.model.Customer;
+import samples.completeapp.bank.service.CustomerService;
 
 @RestController
 public class CustomerController {

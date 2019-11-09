@@ -7,17 +7,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity @Data
+@Entity
+@Data
 public class TwCompany {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String name;
 
     private TwCompany() {
     }
-
     public TwCompany(String name) {
         this.name = name;
     }
-
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
 }

@@ -1,10 +1,10 @@
 package samples.completeapp.bank.service;
 
-import samples.completeapp.bank.model.Customer;
-import samples.completeapp.bank.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import samples.completeapp.bank.model.Customer;
+import samples.completeapp.bank.repository.CustomerRepository;
 
 import java.util.List;
 

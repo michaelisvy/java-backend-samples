@@ -5,7 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
 
-public interface PermUserRepository extends CrudRepository <PermUser, Long> {
+public interface PermUserRepository extends CrudRepository<PermUser, Long> {
 
     @Override
     Optional<PermUser> findById(Long id);

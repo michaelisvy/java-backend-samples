@@ -10,7 +10,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 import samples.SamplesApplication;
 
-
 import javax.persistence.EntityManager;
 
 import static org.assertj.core.api.Assertions.*;
@@ -40,7 +39,8 @@ public class CustomerRepositoryTest {
     }
 
 
-    @Test @Transactional
+    @Test
+    @Transactional
     public void shouldFindCustomerWithAccount() {
         OtmCustomer customer = this.customerRepository.findByLastName(LAST_NAME);
         Hibernate.initialize(customer.getAddresses());
