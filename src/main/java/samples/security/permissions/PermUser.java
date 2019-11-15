@@ -20,6 +20,7 @@ public class PermUser {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private List<PermRole> roleList = new ArrayList<>();
+
     public PermUser(String name) {
         this.name = name;
     }

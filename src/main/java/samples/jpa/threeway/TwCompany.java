@@ -18,6 +18,7 @@ public class TwCompany {
 
     private TwCompany() {
     }
+
     public TwCompany(String name) {
         this.name = name;
     }

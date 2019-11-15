@@ -23,6 +23,12 @@ public class CustomerControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    public static String asJsonString(Customer customer) throws Exception {
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonContent = mapper.writeValueAsString(customer);
+        return jsonContent;
+    }
+
     @Test
     public void shouldRetrieveCustomer() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders
@@ -37,22 +43,11 @@ public class CustomerControllerTest {
 
         Customer customer = new Customer("Alicia", "Isvy");
         this.mockMvc.perform(MockMvcRequestBuilders
-        .post("/customers")
+                .post("/customers")
                 .content(asJsonString(customer))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.firstName").value("Alicia"));
-    }
-
-
-    public static String asJsonString( Customer customer) {
-        try {
-            final ObjectMapper mapper = new ObjectMapper();
-            final String jsonContent = mapper.writeValueAsString(customer);
-            return jsonContent;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 
 }

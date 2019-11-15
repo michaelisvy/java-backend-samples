@@ -2,7 +2,6 @@ package samples.datetime;
 
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
 
 import static org.assertj.core.api.Assertions.*;

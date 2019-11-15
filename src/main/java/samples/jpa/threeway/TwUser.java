@@ -20,6 +20,7 @@ public class TwUser {
     @MapKeyJoinColumn(name = "role_id")
     @ElementCollection
     private Map<TwRole, TwCompany> rolesAndCompanies = new HashMap<>();
+
     public TwUser(String name) {
         this.name = name;
     }

@@ -18,6 +18,7 @@ public class PermApplication {
 
     private PermApplication() {
     }
+
     public PermApplication(String name) {
         this.name = name;
     }

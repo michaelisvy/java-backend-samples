@@ -11,11 +11,11 @@ import java.util.Set;
 public class SeqCustomer {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="customer_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_seq")
     @SequenceGenerator(
-            name="customer_seq",
-            sequenceName="course_sequence",
-            allocationSize=20
+            name = "customer_seq",
+            sequenceName = "course_sequence",
+            allocationSize = 20
     )
     private Long id;
     private String firstName;
