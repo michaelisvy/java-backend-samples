@@ -1,5 +1,6 @@
-package samples.completeapp.bank;
+package samples.completeapp.bank.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import samples.completeapp.bank.model.Customer;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -22,12 +24,35 @@ public class CustomerControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    public void shouldUseMockMvc() throws Exception {
+    public void shouldRetrieveCustomer() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders
-                .get("/customer/{lastName}", "Bauer")
+                .get("/customers/{lastName}", "Bauer")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.firstName").value("Jack"));
+    }
+
+    @Test
+    public void shouldCreateCustomer() throws Exception {
+
+        Customer customer = new Customer("Alicia", "Isvy");
+        this.mockMvc.perform(MockMvcRequestBuilders
+        .post("/customers")
+                .content(asJsonString(customer))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.firstName").value("Alicia"));
+    }
+
+
+    public static String asJsonString( Customer customer) {
+        try {
+            final ObjectMapper mapper = new ObjectMapper();
+            final String jsonContent = mapper.writeValueAsString(customer);
+            return jsonContent;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

@@ -1,12 +1,15 @@
 package samples.completeapp.bank.model;
 
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "customer")
+@Data
 public class Customer {
 
     @Id
@@ -32,13 +35,5 @@ public class Customer {
 
     public void addAccount(Account account) {
         accounts.add(account);
-    }
-
-    public List<Account> getAccounts() {
-        return accounts;
-    }
-
-    public String getFirstName() {
-        return firstName;
     }
 }
