@@ -1,9 +1,17 @@
 package samples.completeapp.bank.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import samples.completeapp.bank.model.Customer;
 import samples.completeapp.bank.service.CustomerService;
+
+import javax.validation.Valid;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 @RestController
 public class CustomerController {
@@ -17,8 +25,14 @@ public class CustomerController {
     }
 
     @PostMapping("/customers")
-    public Customer createCustomer(@RequestBody Customer customer) {
-        this.customerService.save(customer);
-        return customer;
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<?> createCustomer(@RequestBody @Valid Customer customer, Errors errors) throws URISyntaxException {
+        if (errors.hasErrors()) {
+            return ResponseEntity.badRequest().body(errors.getAllErrors());
+        } else {
+            this.customerService.save(customer);
+            URI uri = new URI("/customers/" + customer.getId());
+            return ResponseEntity.created(uri).build();
+        }
     }
 }

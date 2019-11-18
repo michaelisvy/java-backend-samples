@@ -23,7 +23,7 @@ public class CustomerControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    public static String asJsonString(Customer customer) throws Exception {
+    private String asJsonString(Customer customer) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
         String jsonContent = mapper.writeValueAsString(customer);
         return jsonContent;
@@ -47,7 +47,19 @@ public class CustomerControllerTest {
                 .content(asJsonString(customer))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.firstName").value("Alicia"));
+                .andExpect(status().isCreated());
+    }
+
+    @Test
+    public void shouldRefuseInvalidCustomer() throws Exception {
+
+        Customer customer = new Customer("Alicia", "");
+        this.mockMvc.perform(MockMvcRequestBuilders
+                .post("/customers")
+                .content(asJsonString(customer))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
     }
 
 }
