@@ -26,6 +26,7 @@ public class CustomerControllerTest {
     private String asJsonString(Customer customer) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
         String jsonContent = mapper.writeValueAsString(customer);
+        System.out.println(jsonContent);
         return jsonContent;
     }
 
