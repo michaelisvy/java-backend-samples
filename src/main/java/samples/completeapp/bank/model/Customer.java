@@ -2,6 +2,7 @@ package samples.completeapp.bank.model;
 
 
 import lombok.Data;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -11,6 +12,7 @@ import java.util.List;
 @Entity
 @Table(name = "customer")
 @Data
+@EntityListeners(AuditingEntityListener.class)
 public class Customer {
 
     @Id
