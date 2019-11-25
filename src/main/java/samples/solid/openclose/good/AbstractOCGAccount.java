@@ -1,7 +1,6 @@
 package samples.solid.openclose.good;
 
 import lombok.Data;
-import samples.solid.openclose.bad.AccountType;
 
 /**
  * OCBCustomer stands for OpenCloseBadCustomer

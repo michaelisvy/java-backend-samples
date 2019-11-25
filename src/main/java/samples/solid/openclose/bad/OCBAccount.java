@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class OCBAccount {
     private double PERSONAL_ACCOUNT_RATE = 0.03 / 12;
-    private double MEDIUM_COMPANY_RATE = 0.01 /12;
+    private double MEDIUM_COMPANY_RATE = 0.01 / 12;
 
     private int id;
     private String name;

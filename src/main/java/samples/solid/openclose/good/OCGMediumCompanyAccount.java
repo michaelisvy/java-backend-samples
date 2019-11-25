@@ -3,7 +3,7 @@ package samples.solid.openclose.good;
 /**
  * OCGPersonalAccount stands for OpenCloseGoodPersonalAccount
  */
-public class OCGMediumCompanyAccount extends AbstractOCGAccount{
+public class OCGMediumCompanyAccount extends AbstractOCGAccount {
     private double ACCOUNT_RATE = 0.01 / 12;
 
     public OCGMediumCompanyAccount(int id, String name, double statement) {
