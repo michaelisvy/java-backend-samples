@@ -17,7 +17,7 @@ public class VarArgsTest {
     @Test
     public void shouldJustGreet() {
         String message = greet("hello");
-        assertThat(message).isEqualTo("hello ");
+        assertThat(message).isEqualTo("hello");
     }
 
     @Test
