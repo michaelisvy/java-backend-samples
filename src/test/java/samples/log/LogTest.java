@@ -13,6 +13,6 @@ public class LogTest {
 
     @Test
     public void logMessage() {
-        log.info("Date today: {} and Time today: {}", LocalDate.now(), LocalTime.now());
+        log.error("Date today: {} and Time today: {}", LocalDate.now(), LocalTime.now());
     }
 }

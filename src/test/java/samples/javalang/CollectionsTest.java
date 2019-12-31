@@ -1,4 +1,4 @@
-package samples.language.collections;
+package samples.javalang;
 
 import org.junit.jupiter.api.Test;
 
