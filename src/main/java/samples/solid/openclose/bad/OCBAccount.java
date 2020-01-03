@@ -30,7 +30,10 @@ public class OCBAccount {
         } else { // Medium company
             return MEDIUM_COMPANY_RATE * this.statement;
         }
-        // that won't scale for more complex business rules
+        // if we had applied the Open/Closed principle, class would be Opened for extensions and Closed for modifications
+        // that's not the case here: everything is at the same place so everything is opened for modifications.
+
+        // also, that won't scale for more complex business rules
         // Example: Personal accounts have $5 monthly credit if they have setup a Giro transfer from their account
         // they have an additional $20 if they spend over $500 in credit card
         // etc

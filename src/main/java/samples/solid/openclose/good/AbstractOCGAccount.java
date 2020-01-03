@@ -4,6 +4,8 @@ import lombok.Data;
 
 /**
  * OCBCustomer stands for OpenCloseBadCustomer
+ * Open/Closed principle: this class is Opened for extensions (abstract) and closed for modifications
+ * (it's mandatory for all accounts to have an id, a name and a statement)
  */
 @Data
 public abstract class AbstractOCGAccount {
