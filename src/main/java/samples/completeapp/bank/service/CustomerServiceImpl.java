@@ -9,7 +9,7 @@ import samples.completeapp.bank.repository.CustomerRepository;
 import java.util.List;
 
 @Service
-public final class CustomerServiceImpl implements CustomerService {
+public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     private CustomerRepository customerRepository;
