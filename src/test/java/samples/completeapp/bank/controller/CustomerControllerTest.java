@@ -12,6 +12,7 @@ import samples.completeapp.bank.model.Customer;
 
 import java.util.UUID;
 
+import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -60,6 +61,16 @@ public class CustomerControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void shouldFindByLastName() throws Exception {
+
+        this.mockMvc.perform(MockMvcRequestBuilders
+                .get("/customers/Bauer"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.firstName", is("Jack")))
+                .andReturn();
     }
 
 }

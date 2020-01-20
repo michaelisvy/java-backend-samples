@@ -22,4 +22,9 @@ public class VArtist {
     public VArtist(String firstName) {
         this.firstName = firstName;
     }
+
+    public VArtist(@NotNull String firstName, @NotNull String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 }
