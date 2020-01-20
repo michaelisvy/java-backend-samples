@@ -1,6 +1,7 @@
 package samples.completeapp.bank.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -32,7 +33,7 @@ public class Customer {
     @JoinColumn(name = "customer_id")
     private List<Account> accounts = new ArrayList<>();
 
-    @Version
+    @Version @JsonIgnore
     private int version;
 
     protected Customer() {
