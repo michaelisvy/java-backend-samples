@@ -2,20 +2,19 @@ package samples.completeapp.bank.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import samples.completeapp.bank.model.Customer;
 
+import java.util.UUID;
+
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
 public class CustomerControllerTest {
@@ -42,7 +41,7 @@ public class CustomerControllerTest {
     @Test
     public void shouldCreateCustomer() throws Exception {
 
-        Customer customer = new Customer("Alicia", "Isvy");
+        Customer customer = new Customer("Alicia", "Isvy", UUID.randomUUID());
         this.mockMvc.perform(MockMvcRequestBuilders
                 .post("/customers")
                 .content(asJsonString(customer))
@@ -54,7 +53,7 @@ public class CustomerControllerTest {
     @Test
     public void shouldRefuseInvalidCustomer() throws Exception {
 
-        Customer customer = new Customer("Alicia", "");
+        Customer customer = new Customer("Alicia", "", UUID.randomUUID());
         this.mockMvc.perform(MockMvcRequestBuilders
                 .post("/customers")
                 .content(asJsonString(customer))

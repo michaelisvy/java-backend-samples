@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name = "customer")
@@ -18,6 +19,10 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+
+    @Column(columnDefinition = "BINARY(16)")
+    private UUID uuid;
     @NotEmpty
     private String firstName;
     @NotEmpty
@@ -33,9 +38,10 @@ public class Customer {
     protected Customer() {
     }
 
-    public Customer(String firstName, String lastName) {
+    public Customer(String firstName, String lastName, UUID uuid) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.uuid = uuid;
     }
 
     public void addAccount(Account account) {

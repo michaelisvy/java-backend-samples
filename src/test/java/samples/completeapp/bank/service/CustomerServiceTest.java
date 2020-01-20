@@ -11,6 +11,7 @@ import samples.completeapp.bank.model.Account;
 import samples.completeapp.bank.model.Customer;
 
 import java.util.List;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -49,10 +50,12 @@ public class CustomerServiceTest {
 
     @Test
     public void shouldSaveCustomer() {
-        Customer customer = new Customer("Eric", "Dupont");
+        UUID customerUUid = UUID.randomUUID();
+        Customer customer = new Customer("Eric", "Dupont", customerUUid);
         customer.addAccount(new Account(1000000));
         this.customerService.save(customer);
         Customer retrievedCustomer = this.customerService.findByLastName("Dupont");
         assertThat(retrievedCustomer.getFirstName()).isEqualTo("Eric");
+        assertThat(retrievedCustomer.getUuid()).isEqualTo(customerUUid);
     }
 }
