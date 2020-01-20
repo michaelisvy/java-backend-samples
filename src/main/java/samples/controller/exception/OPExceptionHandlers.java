@@ -10,7 +10,7 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @ControllerAdvice
-public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
+public class OPExceptionHandlers extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = { BoomException.class })
     protected ResponseEntity<Object> handleBoomException(BoomException exception, WebRequest request) {
