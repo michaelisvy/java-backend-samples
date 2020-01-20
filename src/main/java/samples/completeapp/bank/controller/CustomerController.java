@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import samples.completeapp.bank.model.Customer;
 import samples.completeapp.bank.service.CustomerService;
 
-import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -25,7 +24,7 @@ public class CustomerController {
 
     @PostMapping("/customers")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<?> createCustomer(@RequestBody @Valid Customer customer, Errors errors) throws URISyntaxException {
+    public ResponseEntity<?> createCustomer(@RequestBody Customer customer, Errors errors) throws URISyntaxException {
         if (errors.hasErrors()) {
             return ResponseEntity.badRequest().body(errors.getAllErrors());
         } else {
