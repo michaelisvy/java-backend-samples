@@ -19,12 +19,20 @@ public class BoomControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    public void shouldThrowException() throws Exception {
+    public void shouldThrowBoomException() throws Exception {
         this.mockMvc.perform(
-                        get("/boom"))
+                        get("/boom1"))
                         .andExpect(status().isBadRequest())
-                        .andExpect(jsonPath("$.message", is("Boom!!!"))
+                        .andExpect(jsonPath("$.message", is("BoomException: Boom!!!"))
                     );
+    }
+
+    @Test
+    public void shouldThrowExceptionUsingResponseStatusException() throws Exception {
+        this.mockMvc.perform(
+                get("/boom2"))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message", is("ResponseStatusException: error came from localBoom")));
     }
 
 }

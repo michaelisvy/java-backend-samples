@@ -10,15 +10,16 @@ import samples.completeapp.bank.model.Customer;
 @Controller
 public class BoomController {
 
-    @GetMapping("/boom")
+    @GetMapping("/boom1")
     public Customer boom() {
         throw new BoomException("Boom!!!");
     }
 
-    @GetMapping("/localBoom")
+    @GetMapping("/boom2")
     public ResponseEntity<String> localBoom() {
         String errorMessage = "error came from localBoom";
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, errorMessage,
                     new RuntimeException(errorMessage));
+        // should be handled by ExceptionResolver dedicated to ResponseStatusException
     }
 }
