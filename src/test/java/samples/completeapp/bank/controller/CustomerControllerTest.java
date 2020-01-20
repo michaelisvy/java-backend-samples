@@ -36,7 +36,22 @@ public class CustomerControllerTest {
                 .get("/customers/{lastName}", "Bauer")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.firstName").value("Jack"));
+                .andExpect(jsonPath("$.firstName").value("Jack"))
+                .andExpect(jsonPath("$.accounts[0].amount").value("50.0"));
+        /*
+        Expected sample response (shortened):
+        {
+            "id": 1,
+            "firstName": "Jack",
+            "lastName": "Bauer",
+            "accounts": [
+                {
+                    "amount": 50.0
+                }
+            ],
+            "version": 1
+        }
+         */
     }
 
     @Test
