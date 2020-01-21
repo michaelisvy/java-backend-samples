@@ -29,11 +29,11 @@ public class VArtistRepositoryTest {
     }
 
     @Test
-    public void shouldShowThatNoValidtionCheckIsDoneForAnUpdate() {
+    public void shouldShowThatNoValidationCheckIsDoneForAnUpdate() {
         VArtist artist = new VArtist("Joe", "Smith");
         this.artistRepository.save(artist);
         this.entityManager.detach(artist);
         artist.setLastName("");
-        this.artistRepository.save(artist);
+        this.artistRepository.save(artist); // save is the method used for entity update
     }
 }
