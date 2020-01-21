@@ -13,8 +13,7 @@ import samples.completeapp.bank.model.Customer;
 import java.util.UUID;
 
 import static org.hamcrest.Matchers.is;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -64,7 +63,9 @@ public class CustomerControllerTest {
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").isNumber())
-                .andExpect(jsonPath("$.lastName").value("Jones"));
+                .andExpect(jsonPath("$.lastName").value("Jones"))
+                // expected `location` header
+                .andExpect(header().string("location", "/customers/3"));
         /*
         Expected sample response (shortened):
         {
