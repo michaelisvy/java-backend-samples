@@ -30,7 +30,7 @@ public class CustomerController {
         } else {
             this.customerService.save(customer);
             URI uri = new URI("/customers/" + customer.getId());
-            return ResponseEntity.created(uri).build();
+            return ResponseEntity.created(uri).body(customer);
         }
     }
 }

@@ -56,14 +56,25 @@ public class CustomerControllerTest {
 
     @Test
     public void shouldCreateCustomer() throws Exception {
-
-        Customer customer = new Customer("Alicia", "Isvy", UUID.randomUUID());
+        Customer customer = new Customer("Alicia", "Jones", UUID.randomUUID());
         this.mockMvc.perform(MockMvcRequestBuilders
                 .post("/customers")
                 .content(asJsonString(customer))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isCreated());
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.id").isNumber())
+                .andExpect(jsonPath("$.lastName").value("Jones"));
+        /*
+        Expected sample response (shortened):
+        {
+            "id": 3,
+            "firstName": "Alicia",
+            "lastName": "Jones",
+            "accounts": []
+        }
+         */
+
     }
 
     @Test
