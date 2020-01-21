@@ -17,6 +17,7 @@
         <java.version>11</java.version>
         <jacoco.version>0.8.3</jacoco.version>
         <junit-jupiter.version>5.3.2</junit-jupiter.version>
+        <swagger.version>2.9.2</swagger.version>
         <jacoco-maven-plugin.version>0.8.0</jacoco-maven-plugin.version>
     </properties>
 
@@ -65,6 +66,17 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger.version}</version>
         </dependency>
 
     </dependencies>

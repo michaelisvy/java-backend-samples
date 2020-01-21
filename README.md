@@ -5,6 +5,9 @@ As of now, this project can be built using Gradle or Maven. Gradle seems much mo
 `gradle bootRun`
 `mvn spring-boot:run`
 
+# Visualising our API (based Swagger documentation)
+Start the application and connect to `http://localhost:8080/swagger-ui.html`
+
 
 # Starting the application with MySql profile
 
