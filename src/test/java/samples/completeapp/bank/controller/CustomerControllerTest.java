@@ -3,11 +3,9 @@ package samples.completeapp.bank.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.transaction.annotation.Transactional;
+import samples.annotation.OPControllerTest;
 import samples.completeapp.bank.model.Customer;
 import samples.completeapp.bank.repository.CustomerRepository;
 
@@ -18,9 +16,7 @@ import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@SpringBootTest
-@Transactional
-@AutoConfigureMockMvc
+@OPControllerTest
 public class CustomerControllerTest {
     @Autowired
     private CustomerRepository customerRepository;
