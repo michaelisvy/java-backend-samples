@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
 import javax.validation.ConstraintViolationException;
 
 @SpringBootTest
@@ -13,6 +14,9 @@ import javax.validation.ConstraintViolationException;
 public class VArtistRepositoryTest {
     @Autowired
     private VArtistRepository artistRepository;
+
+    @Autowired
+    private EntityManager entityManager;
 
     @Test
     public void shouldShowThatValidationHappensBeforeSavingToDB() {
@@ -22,5 +26,14 @@ public class VArtistRepositoryTest {
                     () -> { this.artistRepository.save(artist);} );
 
 
+    }
+
+    @Test
+    public void shouldShowThatNoValidtionCheckIsDoneForAnUpdate() {
+        VArtist artist = new VArtist("Joe", "Smith");
+        this.artistRepository.save(artist);
+        this.entityManager.detach(artist);
+        artist.setLastName("");
+        this.artistRepository.save(artist);
     }
 }

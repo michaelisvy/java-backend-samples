@@ -25,6 +25,9 @@ public class VArtist {
         this.firstName = firstName;
     }
 
+    public VArtist() {
+    }
+
     public VArtist(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
