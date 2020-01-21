@@ -36,7 +36,7 @@ public class CustomerController {
 
     @PutMapping("/customers/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<?> updateCustomer(@RequestBody Customer customer) throws URISyntaxException {
+    public ResponseEntity<Customer> updateCustomer(@RequestBody Customer customer) throws URISyntaxException {
         this.customerService.save(customer);
         URI uri = new URI("/customers/" + customer.getId());
         return ResponseEntity.ok().body(customer);
@@ -44,7 +44,7 @@ public class CustomerController {
 
     @DeleteMapping("/customers/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public ResponseEntity<?> deleteCustomer(@PathVariable Long id) throws URISyntaxException {
+    public ResponseEntity<Void> deleteCustomer(@PathVariable Long id) throws URISyntaxException {
         this.customerService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
