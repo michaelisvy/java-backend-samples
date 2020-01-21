@@ -35,7 +35,7 @@ public class VArtistControllerTest {
 
     @Test
     public void shouldHaveValidationError() throws Exception {
-        VArtist artist = new VArtist("Alicia"); // Lastname is missing
+        VArtist artist = new VArtist("Alicia"); // Lastname is purposely missing
         this.mockMvc.perform(
                 post("/artists")
                         .content(asJsonString(artist))

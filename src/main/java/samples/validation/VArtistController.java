@@ -20,10 +20,17 @@ public class VArtistController {
     public ResponseEntity<VArtist>  createArtist(@RequestBody @Valid VArtist artist, BindingResult bindingResult) throws URISyntaxException {
 
         if (bindingResult.hasErrors()) {
-            throw new RuntimeException(bindingResult.toString());
+            throw new MissingDataException(bindingResult.toString());
         }
 
         URI uri = new URI("/artist/" + artist.getId());
         return ResponseEntity.created(uri).body(artist);
     }
+
+    /*@ExceptionHandler(value = { Exception.class })
+    protected ResponseEntity<Object> handlePlainException(Exception exception, WebRequest request) {
+        String bodyOfResponse = "{\"message\":\""+ "Exception: " + exception.getMessage() + "\"}";
+        return handleExceptionInternal(exception, bodyOfResponse,
+                new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }*/
 }
