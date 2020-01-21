@@ -30,6 +30,10 @@ public class CustomerService {
     public List<Customer> findRichCustomers(float minimumAmount) {
         return this.customerRepository.findRichCustomers(minimumAmount);
     }
+
+    public void deleteById(long id) {
+        this.customerRepository.deleteById(id);
+    }
 }
 
 

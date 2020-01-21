@@ -41,4 +41,11 @@ public class CustomerController {
         URI uri = new URI("/customers/" + customer.getId());
         return ResponseEntity.ok().body(customer);
     }
+
+    @DeleteMapping("/customers/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public ResponseEntity<?> deleteCustomer(@PathVariable Long id) throws URISyntaxException {
+        this.customerService.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
 }

@@ -33,6 +33,13 @@ public class CustomerControllerTest {
         return jsonContent;
     }
 
+    private Customer createAndDetachCustomer() {
+        Customer customer = new Customer("Alicia", "Jones", UUID.randomUUID());
+        this.customerRepository.save(customer);
+        this.entityManager.detach(customer);
+        return customer;
+    }
+
     @Test
     public void shouldRetrieveCustomer() throws Exception {
         this.mockMvc.perform(get("/customers/{lastName}", "Bauer")
@@ -81,9 +88,7 @@ public class CustomerControllerTest {
 
     @Test
     public void shouldUpdateExistingCustomer() throws Exception {
-        Customer customer = new Customer("Alicia", "Jones", UUID.randomUUID());
-        this.customerRepository.save(customer);
-        this.entityManager.detach(customer);
+        Customer customer = createAndDetachCustomer();
 
         customer.setFirstName("Melina");
         String url = "/customers/" + customer.getId();
@@ -92,6 +97,18 @@ public class CustomerControllerTest {
                 .content(asJsonString(customer))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    public void shouldDeleteExistingCustomer() throws Exception {
+        Customer customer = createAndDetachCustomer();
+
+        String url = "/customers/" + customer.getId();
+        this.mockMvc.perform(
+                delete(url)
+                        .content(asJsonString(customer))
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNoContent());
     }
 
     @Test
