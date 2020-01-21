@@ -7,17 +7,26 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.transaction.annotation.Transactional;
 import samples.completeapp.bank.model.Customer;
+import samples.completeapp.bank.repository.CustomerRepository;
 
+import javax.persistence.EntityManager;
 import java.util.UUID;
 
 import static org.hamcrest.Matchers.is;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
+@Transactional
 @AutoConfigureMockMvc
 public class CustomerControllerTest {
+    @Autowired
+    private CustomerRepository customerRepository;
+
+    @Autowired
+    private EntityManager entityManager;
 
     @Autowired
     private MockMvc mockMvc;
@@ -25,14 +34,12 @@ public class CustomerControllerTest {
     private String asJsonString(Customer customer) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
         String jsonContent = mapper.writeValueAsString(customer);
-        System.out.println(jsonContent);
         return jsonContent;
     }
 
     @Test
     public void shouldRetrieveCustomer() throws Exception {
-        this.mockMvc.perform(MockMvcRequestBuilders
-                .get("/customers/{lastName}", "Bauer")
+        this.mockMvc.perform(get("/customers/{lastName}", "Bauer")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.firstName").value("Jack"))
@@ -47,54 +54,67 @@ public class CustomerControllerTest {
                 {
                     "amount": 50.0
                 }
-            ],
-            "version": 1
+            ]
         }
          */
     }
 
     @Test
     public void shouldCreateCustomer() throws Exception {
-        Customer customer = new Customer("Alicia", "Jones", UUID.randomUUID());
-        this.mockMvc.perform(MockMvcRequestBuilders
-                .post("/customers")
-                .content(asJsonString(customer))
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.id").isNumber())
-                .andExpect(jsonPath("$.lastName").value("Jones"))
-                // expected `location` header
-                .andExpect(header().string("location", "/customers/3"));
         /*
         Expected sample response (shortened):
         {
             "id": 3,
             "firstName": "Alicia",
-            "lastName": "Jones",
-            "accounts": []
+            "lastName": "Jones"
         }
          */
+        Customer customer = new Customer("Alicia", "Jones", UUID.randomUUID());
+        this.mockMvc.perform(post("/customers")
+                .content(asJsonString(customer))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().is2xxSuccessful()) // if I need to be generic
+                .andExpect(status().isCreated()) // if I need to be specific
+                .andExpect(jsonPath("$.id").isNumber())
+                .andExpect(jsonPath("$.lastName").value("Jones"))
+                // expected `location` header
+                .andExpect(header().string("location", "/customers/3"));
 
+    }
+
+    @Test
+    public void shouldUpdateExistingCustomer() throws Exception {
+        Customer customer = new Customer("Alicia", "Jones", UUID.randomUUID());
+        this.customerRepository.save(customer);
+        this.entityManager.detach(customer);
+
+        customer.setFirstName("Melina");
+        String url = "/customers/" + customer.getId();
+        this.mockMvc.perform(
+                put(url)
+                .content(asJsonString(customer))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
     }
 
     @Test
     public void shouldRefuseInvalidCustomer() throws Exception {
 
         Customer customer = new Customer("Alicia", "", UUID.randomUUID());
-        this.mockMvc.perform(MockMvcRequestBuilders
-                .post("/customers")
-                .content(asJsonString(customer))
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON))
+        this.mockMvc.perform(
+                post("/customers")
+                    .content(asJsonString(customer))
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
     }
 
     @Test
     public void shouldFindByLastName() throws Exception {
 
-        this.mockMvc.perform(MockMvcRequestBuilders
-                .get("/customers/Bauer"))
+        this.mockMvc.perform(
+                get("/customers/Bauer"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.firstName", is("Jack")))
                 .andReturn();

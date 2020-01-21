@@ -1,13 +1,35 @@
 package samples.completeapp.bank.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import samples.completeapp.bank.model.Customer;
+import samples.completeapp.bank.repository.CustomerRepository;
 
 import java.util.List;
 
-public interface CustomerService {
-    Customer findByLastName(String lastName);
+@Service
+@Transactional
+public class CustomerService {
 
-    void save(Customer customer);
+    @Autowired
+    private CustomerRepository customerRepository;
 
-    List<Customer> findRichCustomers(float minimumAmount);
+    public Customer findByLastName(String lastName) {
+        return this.customerRepository.findByLastName(lastName);
+    }
+
+    public void save(Customer customer) {
+        this.customerRepository.save(customer);
+    }
+
+    public void update(Customer customer) {
+        this.customerRepository.save(customer);
+    }
+
+    public List<Customer> findRichCustomers(float minimumAmount) {
+        return this.customerRepository.findRichCustomers(minimumAmount);
+    }
 }
+
+

@@ -33,4 +33,12 @@ public class CustomerController {
             return ResponseEntity.created(uri).body(customer);
         }
     }
+
+    @PutMapping("/customers/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<?> updateCustomer(@RequestBody Customer customer) throws URISyntaxException {
+        this.customerService.save(customer);
+        URI uri = new URI("/customers/" + customer.getId());
+        return ResponseEntity.ok().body(customer);
+    }
 }
