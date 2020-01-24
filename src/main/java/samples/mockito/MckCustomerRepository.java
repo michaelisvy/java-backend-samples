@@ -9,6 +9,6 @@ public interface MckCustomerRepository extends CrudRepository<MckCustomer, Long>
     @Query("from MckCustomer c where c.lastName =:lastName")
     public MckCustomer findByLastName(String lastName);
 
-    @Query("from MckCustomer c where c.firstName =:firstName")
+    @Query("from MckCustomer c where c.lastName =:lastName")
     public MckCustomer findByFirstName(String lastName);
 }
