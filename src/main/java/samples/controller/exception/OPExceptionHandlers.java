@@ -11,8 +11,10 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @ControllerAdvice
 public class OPExceptionHandlers extends ResponseEntityExceptionHandler {
+    public OPExceptionHandlers() {
+    }
 
-    @ExceptionHandler(value = { BoomException.class })
+    @ExceptionHandler
     protected ResponseEntity<Object> handleBoomException(BoomException exception, WebRequest request) {
         String bodyOfResponse = "{\"message\":\""+ "BoomException: "+ exception.getMessage() + "\"}";
         return handleExceptionInternal(exception, bodyOfResponse,
@@ -20,14 +22,14 @@ public class OPExceptionHandlers extends ResponseEntityExceptionHandler {
     }
 
 
-    @ExceptionHandler(value = { ResponseStatusException.class })
+    @ExceptionHandler
     protected ResponseEntity<Object> handleResponseStatusException(ResponseStatusException exception, WebRequest request) {
         String bodyOfResponse = "{\"message\":\""+ "ResponseStatusException: "+  exception.getReason() + "\"}";
         return handleExceptionInternal(exception, bodyOfResponse,
                 new HttpHeaders(), exception.getStatus(), request);
     }
 
-    @ExceptionHandler(value = { Exception.class })
+    @ExceptionHandler
     protected ResponseEntity<Object> handlePlainException(Exception exception, WebRequest request) {
         String bodyOfResponse = "{\"message\":\""+ "Exception: " + exception.getMessage() + "\"}";
         return handleExceptionInternal(exception, bodyOfResponse,

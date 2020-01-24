@@ -8,4 +8,7 @@ import org.springframework.stereotype.Repository;
 public interface MckCustomerRepository extends CrudRepository<MckCustomer, Long> {
     @Query("from MckCustomer c where c.lastName =:lastName")
     public MckCustomer findByLastName(String lastName);
+
+    @Query("from MckCustomer c where c.firstName =:firstName")
+    public MckCustomer findByFirstName(String lastName);
 }
