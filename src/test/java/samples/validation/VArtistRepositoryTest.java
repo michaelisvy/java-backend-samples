@@ -29,11 +29,16 @@ public class VArtistRepositoryTest {
     }
 
     @Test
-    public void shouldShowThatNoValidationCheckIsDoneForAnUpdate() {
+    public void shouldShowThatValidationCheckIsDoneForAnUpdate() {
         VArtist artist = new VArtist("Joe", "Smith");
         this.artistRepository.save(artist);
         this.entityManager.detach(artist);
         artist.setLastName("");
-        this.artistRepository.save(artist); // save is the method used for entity update
+        Assertions.assertThrows(
+                ConstraintViolationException.class,
+                () -> {
+                    this.artistRepository.save(artist); // save is the method used for entity update
+                    this.entityManager.flush();
+                });
     }
 }
