@@ -17,7 +17,7 @@ public class CustomerRepositoryTest {
     public static final String LAST_NAME = "Smith";
     public static final String FIRST_NAME = "John";
     @Autowired
-    private OtmCustomerRepository customerRepository;
+    private OtmCustomerDoubleJoinFetchRepository customerRepository;
 
     @Autowired
     private EntityManager entityManager;

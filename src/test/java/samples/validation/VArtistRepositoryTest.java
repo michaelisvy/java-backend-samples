@@ -1,6 +1,5 @@
 package samples.validation;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -8,6 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.validation.ConstraintViolationException;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 @Transactional
@@ -21,7 +22,7 @@ public class VArtistRepositoryTest {
     @Test
     public void shouldShowThatValidationHappensBeforeSavingToDB() {
         VArtist artist = new VArtist("Joe");
-        Assertions.assertThrows(
+        assertThrows(
                     ConstraintViolationException.class,
                     () -> { this.artistRepository.save(artist);} );
 
@@ -34,7 +35,7 @@ public class VArtistRepositoryTest {
         this.artistRepository.save(artist);
         this.entityManager.detach(artist);
         artist.setLastName("");
-        Assertions.assertThrows(
+        assertThrows(
                 ConstraintViolationException.class,
                 () -> {
                     this.artistRepository.save(artist); // save is the method used for entity update
