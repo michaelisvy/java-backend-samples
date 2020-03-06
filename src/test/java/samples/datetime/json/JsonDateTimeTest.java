@@ -25,7 +25,7 @@ public class JsonDateTimeTest {
         StringWriter stringWriter = new StringWriter();
         this.jacksonObjectMapper.writeValue(stringWriter, book);
         assertThat(stringWriter).isNotNull();
-        System.out.println("Employee JSON is\n" + stringWriter);
+        System.out.println("Employee JSON is:\n" + stringWriter);
     }
 
     @Test
