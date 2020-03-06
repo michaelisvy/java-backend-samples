@@ -19,6 +19,9 @@ public class CustomerServiceUnitTest {
     @Autowired
     private MckCustomerService customerService;
 
+    @MockBean
+    private MckCustomerRepository customerRepository;
+
     @Autowired
     private EntityManager entityManager;
 
