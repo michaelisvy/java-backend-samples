@@ -16,7 +16,7 @@ public class EmbeddedCustomerTest {
     @Test @Transactional
     public void shouldPersistedEmbeddedAddress() {
         ECustomer customer = new ECustomer("John", "Smith");
-        customer.setAddress(new EAddress("Serangoon avenue 2", "Singapore"));
+        customer.setAddress(new EAddress("Serangoon Avenue 2", "Singapore"));
         this.entityManager.persist(customer);
         Assertions.assertThat(customer.getId()).isGreaterThan(0);
 
