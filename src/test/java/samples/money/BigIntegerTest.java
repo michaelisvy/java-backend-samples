@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import static org.assertj.core.api.Assertions.*;
 
 
-public class MoneyTest {
+public class BigIntegerTest {
 
     @Test
     public void shouldSumBigDecimals() {

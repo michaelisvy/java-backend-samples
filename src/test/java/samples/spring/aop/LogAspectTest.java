@@ -14,6 +14,6 @@ public class LogAspectTest {
     @Test
     public void shouldReturnBob() {
         String name = this.customerService.findName();
-        assertThat(name).isEqualTo("Bob");
+        assertThat(name).isEqualTo("Sam");
     }
 }
