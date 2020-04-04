@@ -27,8 +27,12 @@ public class CustomerService {
         this.customerRepository.save(customer);
     }
 
-    public List<Customer> findRichCustomers(float minimumAmount) {
-        return this.customerRepository.findRichCustomers(minimumAmount);
+    public List<Customer> findRichCustomersOneAccount(float minimumAmount) {
+        return this.customerRepository.findRichCustomersOneAccount(minimumAmount);
+    }
+
+    public List<Customer> findRichCustomersMultipleAccount(double minimumAmount) {
+        return this.customerRepository.findRichCustomersMultipleAccounts(minimumAmount);
     }
 
     public void deleteById(long id) {

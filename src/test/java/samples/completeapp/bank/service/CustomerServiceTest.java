@@ -21,6 +21,13 @@ public class CustomerServiceTest {
     @Autowired
     private CustomerService customerService;
 
+    private void saveRichCustomer() {
+        Customer customer = new Customer("Bill", "Gates", null);
+        customer.addAccount(new Account(1000000));
+        customer.addAccount(new Account(2000000));
+        this.customerService.save(customer);
+    }
+
     @Test
     public void shouldFindCustomer() {
         Customer customer = this.customerService.findByLastName("Bauer");
@@ -30,11 +37,22 @@ public class CustomerServiceTest {
     @Test
     @Transactional
     // @Transactional is needed because Hibernate session needs to remain open when we do customer.getAccount()
-    public void shouldFindRichCustomers() {
+    public void shouldFindRichCustomersOneAccount() {
         float minimumAmount = 500;
-        List<Customer> customers = this.customerService.findRichCustomers(minimumAmount);
+        List<Customer> customers = this.customerService.findRichCustomersOneAccount(minimumAmount);
         Account firstAccount = customers.get(0).getAccounts().get(0);
         assertThat(firstAccount.getAmount()).isGreaterThanOrEqualTo(minimumAmount);
+    }
+
+    @Test
+    @Transactional
+    public void shouldFindRichCustomersMultipleAccount() {
+        this.saveRichCustomer();
+        float minimumAmount = 2000000;
+        List<Customer> customers = this.customerService.findRichCustomersMultipleAccount(minimumAmount);
+        assertThat(customers.size()).isEqualTo(1);
+        Account firstAccount = customers.get(0).getAccounts().get(0);
+        assertThat(firstAccount.getAmount()).isGreaterThanOrEqualTo(1000000);
     }
 
     @Test

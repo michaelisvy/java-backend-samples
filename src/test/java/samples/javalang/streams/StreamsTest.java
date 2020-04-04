@@ -15,7 +15,7 @@ public class StreamsTest {
 
     @Test
     public void shouldFilterAList() {
-        List<String> strings = Arrays   .asList("abc", "", "bc", "efg", "abcd","", "jkl");
+        List<String> strings = Arrays.asList("abc", "", "bc", "efg", "abcd","", "jkl");
         List<String> filtered = strings.stream().filter(string -> !string.isEmpty()).collect(Collectors.toList());
         assertThat(filtered.size()).isEqualTo(5);
         assertThat(filtered).contains("abc", "bc", "efg", "abcd", "jkl");
@@ -23,7 +23,7 @@ public class StreamsTest {
 
     @Test
     public void shouldSortAList() {
-        List<String> strings = Arrays   .asList("abc", "", "bc", "jkl", "abcd","", "efg");
+        List<String> strings = Arrays.asList("abc", "", "bc", "jkl", "abcd","", "efg");
         List<String> filtered = strings.stream().sorted().filter(string -> !string.isEmpty()).collect(Collectors.toList());
         assertThat(filtered.size()).isEqualTo(5);
         assertThat(filtered).containsExactly("abc", "abcd", "bc", "efg", "jkl");

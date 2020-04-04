@@ -29,6 +29,10 @@ public class CustomerEntityManagerTest {
         this.entityManager.flush(); // necessary otherwise foreign key is not updated
         assertThat(customer.getId()).isGreaterThan(0);
 
+        this.entityManager.clear();
+        OtmCustomer newCustomer = (OtmCustomer) this.entityManager.createQuery("from OtmCustomer where firstName=:firstName")
+                .setParameter("firstName", FIRST_NAME).getSingleResult();
+        assertThat(newCustomer.getAccounts().size()).isGreaterThan(0);
     }
 
 }
