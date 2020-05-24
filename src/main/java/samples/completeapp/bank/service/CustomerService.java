@@ -23,6 +23,10 @@ public class CustomerService {
         this.customerRepository.save(customer);
     }
 
+    public void saveAll(List<Customer> customerList) {
+        this.customerRepository.saveAll(customerList);
+    }
+
     public void update(Customer customer) {
         this.customerRepository.save(customer);
     }

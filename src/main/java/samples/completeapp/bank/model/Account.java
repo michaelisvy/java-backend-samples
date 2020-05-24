@@ -1,9 +1,12 @@
 package samples.completeapp.bank.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "account")
+@Data
 public class Account {
 
     @Id
@@ -11,6 +14,7 @@ public class Account {
     private Long id;
 
     private float amount;
+    private String name;
 
     public Account() {
     }
@@ -19,7 +23,4 @@ public class Account {
         this.amount = amount;
     }
 
-    public float getAmount() {
-        return amount;
-    }
 }

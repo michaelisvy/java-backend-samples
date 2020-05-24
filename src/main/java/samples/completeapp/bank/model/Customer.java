@@ -29,14 +29,14 @@ public class Customer {
     @NotEmpty
     private String lastName;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id")
     private List<Account> accounts = new ArrayList<>();
 
     @Version @JsonIgnore
     private int version;
 
-    protected Customer() {
+    public Customer() {
     }
 
     public Customer(String firstName, String lastName, UUID uuid) {
