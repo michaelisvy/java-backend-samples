@@ -14,7 +14,7 @@ import java.time.LocalTime;
 @Slf4j
 public class RetriableServiceAdvanced {
 
-    @Retryable(value = CustomRetryException.class, maxAttempts = 2, backoff = @Backoff(delay = 1000))
+    @Retryable(value = CustomRetryException.class, maxAttemptsExpression = "#{@attemptsCalculator.maxAttempts}", backoff = @Backoff(delay = 1000))
     public void attempt(Counter counter) {  
         counter.addAttempt();
         log.info(LocalTime.now().toString());

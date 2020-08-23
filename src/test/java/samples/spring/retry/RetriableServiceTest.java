@@ -16,7 +16,7 @@ public class RetriableServiceTest {
     public void shouldRetry() {
         Counter counter = new Counter();
         this.retriableService.attempt(counter);
-        assertThat(counter.getAttempts()).isEqualTo(5);
+        assertThat(counter.getAttempts()).isEqualTo(2);
         assertThat(counter.getRecoveries()).isEqualTo(1);
     }
 

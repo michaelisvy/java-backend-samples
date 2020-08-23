@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class RetriableService {
-    @Retryable(value = CustomRetryException.class, maxAttempts = 5)
+    @Retryable(value = CustomRetryException.class, maxAttempts = 2)
     public void attempt(Counter counter) {
         counter.addAttempt();
         throw new CustomRetryException();
