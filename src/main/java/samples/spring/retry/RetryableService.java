@@ -6,7 +6,7 @@ import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RetriableService {
+public class RetryableService {
     @Retryable(value = CustomRetryException.class, maxAttempts = 2)
     public void attempt(Counter counter) {
         counter.addAttempt();
